@@ -6,6 +6,7 @@
       integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
       crossorigin="anonymous"
     />
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
     <title>JSON Server</title>
   </head>
@@ -80,6 +81,59 @@
       </div>
     </footer>
 
+
     <script src="script.js"></script>
+
+
+
+    <?php
+      require_once('../vendor/autoload.php');
+
+      use App\APIController;
+
+      $api = new APIController();
+
+      $api->userGetData(1);
+      echo $api->getUser(1)->name;
+
+      echo "<br><br>";
+
+      echo $api->postsGetData(1);
+      echo $api->getUserPosts(1)[11]->title;
+      echo "<br>";
+      $user1posts = $api->getUserPosts(1);
+      foreach($user1posts as $user1post){
+        echo json_encode($user1post);
+        echo gettype($user1post);
+        echo "<br>";
+      }
+
+      echo "<br><br>";
+
+      echo $api->todosGetData(1);
+      echo $api->getUserTodos(1)[0]->title;
+      echo "<br>";
+      $user1todos = $api->getUserTodos(1);
+      foreach($user1todos as $user1todo){
+        echo json_encode($user1todo);
+        echo gettype($user1todo);
+        echo "<br>";
+      }
+
+      echo "<br><br>";
+
+      echo $api->addPost(1, 'title', 'body');
+
+      echo "<br><br>";
+
+      echo $api->editPost(1, 0, 'new title', 'new body');
+
+      echo "<br><br>";
+
+      echo $api->deletePost(1, 1);
+    ?>
+
+
+
   </body>
 </html>
