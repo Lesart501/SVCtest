@@ -4,14 +4,17 @@ namespace App;
 
 
 class APIController{
+    // создаются поля-массивы, в которых будут храниться данные о пользователях, постах и заданиях
     private array $users;
     private array $posts;
     private array $todos;
 
+    // метод получения пользователя
     public function userGetData(int $id){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$id");
         $this->users[$id] = json_decode($data);
     }
+    // метод получения постов пользователя
     public function postsGetData(int $userID){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$userID/posts");
         $postsArr = json_decode($data, true);
@@ -20,6 +23,7 @@ class APIController{
         }
         $this->posts[$userID] = $postsArr;
     }
+    // метод получения заданий пользователя
     public function todosGetData(int $userID){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$userID/todos");
         $todosArr = json_decode($data, true);
@@ -29,6 +33,7 @@ class APIController{
         $this->todos[$userID] = $todosArr;
     }
 
+    // геттеры для получения пользователей, их постов и заданий
     public function getUser(int $id){
         return $this->users[$id];
     }
@@ -39,6 +44,7 @@ class APIController{
         return $this->todos[$userID];
     }
 
+    // метод добавления нового поста в json и отправка обновлённых данных
     public function addPost(int $userId, string $title, string $body){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$userId/posts");
         $tempArray = json_decode($data, true);
@@ -58,6 +64,7 @@ class APIController{
         $result = curl_exec($crl);
         return $result;
     }
+    // метод изменения поста в json и отправка обновлённых данных
     public function editPost(int $userId, int $postId, string $title, string $body){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$userId/posts");
         $tempArray = json_decode($data, true);
@@ -75,6 +82,7 @@ class APIController{
         $result = curl_exec($crl);
         return $result;
     }
+    // метод удаления поста в json и отправка обновлённых данных
     public function deletePost(int $userId, int $postId){
         $data = file_get_contents("https://jsonplaceholder.typicode.com/users/$userId/posts");
         $tempArray = json_decode($data, true);

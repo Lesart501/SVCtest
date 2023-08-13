@@ -87,20 +87,27 @@
 
 
     <?php
+      // подключение composer autoload
       require_once('../vendor/autoload.php');
 
+      // подключение созданного класса
       use App\APIController;
 
+      // создание экземпляра класса
       $api = new APIController();
 
+      // получение данных о первом пользователе и вывод его имени
       $api->userGetData(1);
       echo $api->getUser(1)->name;
 
       echo "<br><br>";
 
+      // получение постов пользователя
       echo $api->postsGetData(1);
+      // вывод заголовка поста с индексом 11
       echo $api->getUserPosts(1)[11]->title;
       echo "<br>";
+      // вывод постов пользователя через цикл
       $user1posts = $api->getUserPosts(1);
       foreach($user1posts as $user1post){
         echo json_encode($user1post);
@@ -110,9 +117,12 @@
 
       echo "<br><br>";
 
+      // получение заданий пользователя
       echo $api->todosGetData(1);
+      // вывод заголовка задания с индексом 0
       echo $api->getUserTodos(1)[0]->title;
       echo "<br>";
+      // вывод заданий пользователя через цикл
       $user1todos = $api->getUserTodos(1);
       foreach($user1todos as $user1todo){
         echo json_encode($user1todo);
@@ -122,14 +132,17 @@
 
       echo "<br><br>";
 
+      // добавление поста у пользователя 1 с заголовком title' и телом 'body'
       echo $api->addPost(1, 'title', 'body');
 
       echo "<br><br>";
 
+      // изменение заголовка и тела поста с индексом 0 у пользователя 1
       echo $api->editPost(1, 0, 'new title', 'new body');
 
       echo "<br><br>";
 
+      // удаление индексом 1 у пользователя 1
       echo $api->deletePost(1, 1);
     ?>
 
