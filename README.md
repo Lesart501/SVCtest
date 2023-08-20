@@ -3,3 +3,5 @@
 Для задания был клонирован репозиторий JSONPlaceholder https://github.com/typicode/json-server.git
 Класс для работы с API расположен в app/APIController.php, примеры его вызова приведены в public/index.php.
 Для подключения класса к файлу был использован composer.
+
+Проверяю, работает ли у меня гит на ноуте
